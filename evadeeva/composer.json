@@ -1,6 +1,17 @@
 {
-    "autoload": 
-    {
-           "psr-4": { "myvendor\\": "app/" }
+    "name": "chien/test",
+    "autoload": {
+        "psr-4": {
+            "app\\": "./"
+        }
+    },
+    "authors": [
+        {
+            "name": "ChienHP",
+            "email": "chien.lv194233@sis.hust.edu.vn"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.4"
     }
-   }
+}
