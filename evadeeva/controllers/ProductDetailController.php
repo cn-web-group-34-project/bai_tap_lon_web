@@ -27,6 +27,20 @@ class ProductDetailController extends Controller{
         }
     }
 
+    public function get_product_detail_by_categoryID(Request $request){
+        if ($request->isGet()){
+            $data = $request->getBody();
+            $result = $this->model->get_product_detail_by_categoryID($data);
+        if ($result->rowCount()>0){
+            $arrays = [];
+            while ($row = $result->fetch(PDO::FETCH_ASSOC)){
+                array_push($arrays,$row);
+            }
+        }
+        return json_encode($arrays);
+        }
+    }
+
     public function insert_product_detail(Request $request){
         if ($request->isPost()){
             $this->model->loadData($request->getBody());

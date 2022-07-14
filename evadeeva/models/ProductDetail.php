@@ -25,6 +25,16 @@ class ProductDetail extends Model{
     public function getIdName(){
         return 'ProductDetailID';
     }
+
+    public function get_product_detail_by_categoryID($param){
+        foreach ($param as $key => $value){
+            $cond = "$key = '$value'";
+        }
+        $query = "SELECT * FROM category, producttype, products, productdetail WHERE category.CategoryID = producttype.CategoryID AND producttype.ProductTypeID = products.ProductTypeID AND productdetail.ProductID = products.ProductID AND category.$cond";
+        $statement = self::prepare($query);
+        $statement->execute();
+        return $statement;
+    }
 }
 
 ?>

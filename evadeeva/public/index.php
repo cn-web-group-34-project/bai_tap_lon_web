@@ -69,6 +69,7 @@ $app->router->delete('/delete_order',[OrderController::class,'delete_order']);
 
 $app->router->post('/insert_product_detail',[ProductDetailController::class,'insert_product_detail']);
 $app->router->get('/get_product_detail_by_id',[ProductDetailController::class,'get_product_detail_by_id']);
+$app->router->get('/get_product_detail_by_categoryID',[ProductDetailController::class,'get_product_detail_by_categoryID']);
 $app->router->put('/update_product_detail',[ProductDetailController::class,'update_product_detail']);
 $app->router->delete('/delete_product_detail',[ProductDetailController::class,'delete_product_detail']);
 
