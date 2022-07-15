@@ -1,12 +1,6 @@
 <?php
 require_once __DIR__.'/../vendor/autoload.php';
 
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE");
-header("Access-Control-Max-Age: 3600");
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-
 use app\controllers\SiteController;
 use app\controllers\AuthController;
 use app\controllers\CategoryController;
@@ -16,6 +10,25 @@ use app\controllers\ProductController;
 use app\controllers\ProductDetailController;
 use app\controllers\ProductTypeController;
 use app\core\Application;
+
+
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE");
+header("Access-Control-Max-Age: 3600");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+
+    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
+        // may also be using PUT, PATCH, HEAD etc
+        header("Access-Control-Allow-Methods: GET, DELETE ,POST, OPTIONS");         
+
+    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
+        header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
+
+    exit(0);
+}
 
 $config = [
     'db'=>[
@@ -56,6 +69,7 @@ $app->router->delete('/delete_customer',[CustomerController::class,'delete_custo
 
 $app->router->post('/insert_product',[ProductController::class,'insert_product']);
 $app->router->get('/get_all_products',[ProductController::class,'get_all_products']);
+$app->router->get('/get_product_by_categoryID',[ProductController::class,'get_product_by_categoryID']);
 $app->router->get('/get_products_limit_by_id',[ProductController::class,'get_products_limit_by_id']);
 $app->router->get('/get_product_by_id',[ProductController::class,'get_product_by_id']);
 $app->router->put('/update_product',[ProductController::class,'update_product']);
@@ -66,13 +80,6 @@ $app->router->get('/get_all_orders',[OrderController::class,'get_all_orders']);
 $app->router->get('/get_order_by_id',[OrderController::class,'get_order_by_id']);
 $app->router->put('/update_product',[OrderController::class,'update_product']);
 $app->router->delete('/delete_order',[OrderController::class,'delete_order']);
-
-$app->router->post('/insert_product_detail',[ProductDetailController::class,'insert_product_detail']);
-$app->router->get('/get_product_detail_by_id',[ProductDetailController::class,'get_product_detail_by_id']);
-$app->router->get('/get_product_detail_by_categoryID',[ProductDetailController::class,'get_product_detail_by_categoryID']);
-$app->router->put('/update_product_detail',[ProductDetailController::class,'update_product_detail']);
-$app->router->delete('/delete_product_detail',[ProductDetailController::class,'delete_product_detail']);
-
 
 $app->run();
 ?>

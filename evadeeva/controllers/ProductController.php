@@ -3,14 +3,14 @@ namespace app\controllers;
 
 use app\core\Controller;
 use app\core\Request;
-use app\models\Products;
+use app\models\Product;
 use PDO;
 
 class ProductController extends Controller{
-    public Products $model;
+    public Product $model;
     public function __construct()
     {
-        $this->model = new Products();
+        $this->model = new Product();
     }
     public function get_all_products(){
         $result = $this->model->select();
@@ -21,6 +21,20 @@ class ProductController extends Controller{
             }
         }
         return json_encode($arrays);
+    }
+
+    public function get_product_by_categoryID(Request $request){
+        if ($request->isGet()){
+            $data = $request->getBody();
+            $result = $this->model->get_product_by_categoryID($data);
+        if ($result->rowCount()>0){
+            $arrays = [];
+            while ($row = $result->fetch(PDO::FETCH_ASSOC)){
+                array_push($arrays,$row);
+            }
+        }
+        return json_encode($arrays);
+        }
     }
 
     public function get_products_limit_by_id(Request $request){
@@ -73,5 +87,6 @@ class ProductController extends Controller{
             return $this->model->delete($data);
         }
     }
+
 }
 ?>
