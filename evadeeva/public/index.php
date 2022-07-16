@@ -9,6 +9,7 @@ use app\controllers\OrderController;
 use app\controllers\ProductController;
 use app\controllers\ProductDetailController;
 use app\controllers\ProductTypeController;
+use app\controllers\UserController;
 use app\core\Application;
 
 
@@ -61,11 +62,12 @@ $app->router->get('/get_product_types_by_id',[ProductTypeController::class,'get_
 $app->router->put('/update_product_type',[ProductTypeController::class,'update_product_type']);
 $app->router->delete('/delete_product_type',[ProductTypeController::class,'delete_product_type']);
 
-$app->router->post('/insert_customer',[CustomerController::class,'insert_customer']);
-$app->router->get('/get_all_customers',[CustomerController::class,'get_all_customers']);
-$app->router->get('/get_customer_by_id',[CustomerController::class,'get_customer_by_id']);
-$app->router->put('/update_customer',[CustomerController::class,'update_customer']);
-$app->router->delete('/delete_customer',[CustomerController::class,'delete_customer']);
+$app->router->post('/insert_user',[UserController::class,'insert_user']);
+$app->router->post('/register',[UserController::class,'register']);
+$app->router->get('/get_all_users',[UserController::class,'get_all_users']);
+$app->router->get('/get_user_by_id',[UserController::class,'get_user_by_id']);
+$app->router->put('/update_user',[UserController::class,'update_user']);
+$app->router->delete('/delete_user',[UserController::class,'delete_user']);
 
 $app->router->post('/insert_product',[ProductController::class,'insert_product']);
 $app->router->get('/get_all_products',[ProductController::class,'get_all_products']);
