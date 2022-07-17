@@ -17,6 +17,7 @@ class ProductController extends Controller{
         if ($result->rowCount()>0){
             $arrays = [];
             while ($row = $result->fetch(PDO::FETCH_ASSOC)){
+                $row['Image'] = explode(",",$row['Image']);
                 array_push($arrays, $row);
             }
         }
@@ -30,6 +31,7 @@ class ProductController extends Controller{
         if ($result->rowCount()>0){
             $arrays = [];
             while ($row = $result->fetch(PDO::FETCH_ASSOC)){
+                $row['Image'] = explode(",",$row['Image']);
                 array_push($arrays,$row);
             }
         }
@@ -45,6 +47,7 @@ class ProductController extends Controller{
             if ($result->rowCount()>0){
                 $arrays = [];
                 while ($row = $result->fetch(PDO::FETCH_ASSOC)){
+                    $row['Image'] = explode(",",$row['Image']);
                     array_push($arrays,$row);
                 }
             }
@@ -59,6 +62,7 @@ class ProductController extends Controller{
             if ($result->rowCount()>0){
                 $arrays = [];
                 while ($row = $result->fetch(PDO::FETCH_ASSOC)){
+                    $row['Image'] = explode(",",$row['Image']);
                     array_push($arrays,$row);
                 }
             }

@@ -80,7 +80,7 @@ $app->router->delete('/delete_product',[ProductController::class,'delete_product
 $app->router->post('/update_order',[OrderController::class,'update_order']);
 $app->router->get('/get_all_orders',[OrderController::class,'get_all_orders']);
 $app->router->get('/get_order_by_id',[OrderController::class,'get_order_by_id']);
-$app->router->put('/update_product',[OrderController::class,'update_product']);
+$app->router->put('/update_order',[OrderController::class,'update_order']);
 $app->router->delete('/delete_order',[OrderController::class,'delete_order']);
 
 $app->run();
