@@ -24,18 +24,60 @@ class ProductController extends Controller{
         return json_encode($arrays);
     }
 
+    public function get_num_product(){
+        $result = $this->model->select();
+        if ($result->rowCount()>0){
+            return json_encode($result->rowCount());
+        }
+    }
+
+    public function get_limit_products(Request $request){
+        if ($request->isGet()){
+            $data = $request->getBody();
+            $result = $this->model->select_limit($data['offset'], $data['count']);
+            if ($result->rowCount()>0){
+                $arrays = [];
+                while ($row = $result->fetch(PDO::FETCH_ASSOC)){
+                    $row['Image'] = explode(",",$row['Image']);
+                    array_push($arrays, $row);
+                }
+            }
+            return json_encode($arrays);
+        }
+    }
+
     public function get_product_by_categoryID(Request $request){
         if ($request->isGet()){
             $data = $request->getBody();
             $result = $this->model->get_product_by_categoryID($data);
-        if ($result->rowCount()>0){
-            $arrays = [];
-            while ($row = $result->fetch(PDO::FETCH_ASSOC)){
-                $row['Image'] = explode(",",$row['Image']);
-                array_push($arrays,$row);
+            if ($result->rowCount()>0){
+                $arrays = [];
+                while ($row = $result->fetch(PDO::FETCH_ASSOC)){
+                    $row['Image'] = explode(",",$row['Image']);
+                    array_push($arrays,$row);
+                }
+                return json_encode($arrays);
             }
         }
-        return json_encode($arrays);
+    }
+
+    public function get_num_product_by_CategoryID(Request $request){
+        if ($request->isGet()){
+            $data = $request->getBody();
+            $result = $this->model->get_product_by_categoryID($data);
+            if ($result->rowCount()>0){
+                return json_encode($result->rowCount());
+            }
+        }
+    }
+
+    public function get_num_product_by_ProductTypeID(Request $request){
+        if ($request->isGet()){
+            $data = $request->getBody();
+            $result = $this->model->select_by_id($data);
+            if ($result->rowCount()>0){
+                return $result->rowCount();
+            }
         }
     }
 
@@ -43,7 +85,7 @@ class ProductController extends Controller{
         if ($request->isGet()){
             $data = $request->getBody();
             $id[array_keys($data)[0]]=array_values($data)[0];
-            $result = $this->model->select_limit_by_id($id, $data['offset'], $data['count']);
+            $result = $this->model->get_products_limit_by_id($id, $data['offset'], $data['count']);
             if ($result->rowCount()>0){
                 $arrays = [];
                 while ($row = $result->fetch(PDO::FETCH_ASSOC)){

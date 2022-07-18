@@ -73,6 +73,10 @@ $app->router->post('/insert_product',[ProductController::class,'insert_product']
 $app->router->get('/get_all_products',[ProductController::class,'get_all_products']);
 $app->router->get('/get_product_by_categoryID',[ProductController::class,'get_product_by_categoryID']);
 $app->router->get('/get_products_limit_by_id',[ProductController::class,'get_products_limit_by_id']);
+$app->router->get('/get_limit_products',[ProductController::class,'get_limit_products']);
+$app->router->get('/get_num_product',[ProductController::class,'get_num_product']);
+$app->router->get('/get_num_product_by_CategoryID',[ProductController::class,'get_num_product_by_CategoryID']);
+$app->router->get('/get_num_product_by_ProductTypeID',[ProductController::class,'get_num_product_by_ProductTypeID']);
 $app->router->get('/get_product_by_id',[ProductController::class,'get_product_by_id']);
 $app->router->put('/update_product',[ProductController::class,'update_product']);
 $app->router->delete('/delete_product',[ProductController::class,'delete_product']);

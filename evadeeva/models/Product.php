@@ -41,4 +41,16 @@ class Product extends Model{
         $statement->execute();
         return $statement;
     }
+
+    public function get_products_limit_by_id($param, $offset, $count){
+        foreach ($param as $key => $value){
+            $cond = "$key = '$value'";
+        }
+        $query = "SELECT * FROM category, producttype, product WHERE category.CategoryID = producttype.CategoryID AND producttype.ProductTypeID = product.ProductTypeID AND producttype.$cond LIMIT $offset, $count";
+        $statement = self::prepare($query);
+        $statement->execute();
+        return $statement;
+    }
+
+    
 }
