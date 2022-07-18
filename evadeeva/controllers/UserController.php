@@ -13,6 +13,31 @@ class UserController extends Controller{
         $this->model = new User();
     }
 
+    public function login(Request $request){
+        if ($request->isPost()){
+            $data = $request->getBody();
+            $email['Email']= $request->getBody()['Email'];
+            $result = $this->model->select_by_id($email);
+            if ($result->rowCount()>0){
+                $arrays = [];
+                while ($row = $result->fetch(PDO::FETCH_ASSOC)){
+                    if ($data['PassWord'] == $row['PassWord']){
+                        array_push($arrays, $row);
+                        return json_encode($arrays);
+                    }
+                    else{
+                        $error['error'] = 1;
+                        return json_encode($error);
+                    }
+                }
+            }
+            else {
+                $error['error'] = 0;
+                return json_encode($error);
+            }
+        }
+    }
+
     public function register(Request $request){
         if ($request->isPost()){
             $data['Email']= $request->getBody()['Email'];

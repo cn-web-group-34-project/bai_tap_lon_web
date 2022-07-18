@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
     if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
         // may also be using PUT, PATCH, HEAD etc
-        header("Access-Control-Allow-Methods: GET, DELETE ,POST, OPTIONS");         
+        header("Access-Control-Allow-Methods: PUT, GET, DELETE ,POST, OPTIONS");         
 
     if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
         header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
@@ -64,6 +64,7 @@ $app->router->delete('/delete_product_type',[ProductTypeController::class,'delet
 
 $app->router->post('/insert_user',[UserController::class,'insert_user']);
 $app->router->post('/register',[UserController::class,'register']);
+$app->router->post('/login',[UserController::class,'login']);
 $app->router->get('/get_all_users',[UserController::class,'get_all_users']);
 $app->router->get('/get_user_by_id',[UserController::class,'get_user_by_id']);
 $app->router->put('/update_user',[UserController::class,'update_user']);
@@ -81,11 +82,12 @@ $app->router->get('/get_product_by_id',[ProductController::class,'get_product_by
 $app->router->put('/update_product',[ProductController::class,'update_product']);
 $app->router->delete('/delete_product',[ProductController::class,'delete_product']);
 
-$app->router->post('/update_order',[OrderController::class,'update_order']);
+$app->router->post('/insert_order',[OrderController::class,'insert_order']);
 $app->router->get('/get_all_orders',[OrderController::class,'get_all_orders']);
 $app->router->get('/get_order_by_id',[OrderController::class,'get_order_by_id']);
 $app->router->put('/update_order',[OrderController::class,'update_order']);
 $app->router->delete('/delete_order',[OrderController::class,'delete_order']);
+
 
 $app->run();
 ?>
