@@ -13,10 +13,11 @@ class OrderController extends Controller{
         $this->model = new Order();
     }
     public function get_all_orders(){
-        $result = $this->model->select();
+        $result = $this->model->get_all_orders();
         if ($result->rowCount()>0){
             $arrays = [];
             while ($row = $result->fetch(PDO::FETCH_ASSOC)){
+                $row['Image'] = explode(",",$row['Image']);
                 array_push($arrays, $row);
             }
         }
