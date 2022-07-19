@@ -27,15 +27,17 @@ class OrderController extends Controller{
     public function get_order_by_id(Request $request){
         if ($request->isGet()){
             $data = $request->getBody();
-        }
-        $result = $this->model->select_by_id($data);
-        if ($result->rowCount()>0){
-            $arrays = [];
-            while ($row = $result->fetch(PDO::FETCH_ASSOC)){
-                array_push($arrays,$row);
+            $id[array_keys($data)[0]]=array_values($data)[0];
+            $result = $this->model->get_order_by_id($id, $data['offset'], $data['count']);
+            if ($result->rowCount()>0){
+                $arrays = [];
+                while ($row = $result->fetch(PDO::FETCH_ASSOC)){
+                    $row['Image'] = explode(",",$row['Image']);
+                    array_push($arrays,$row);
+                }
             }
+            return json_encode($arrays);
         }
-        return json_encode($arrays);
     }
 
     public function insert_order(Request $request){
