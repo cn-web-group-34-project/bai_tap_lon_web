@@ -44,6 +44,13 @@ class Order extends Model{
         return $statement;
     }
 
+    public function get_limit_orders($offset, $count){
+        $query = "SELECT * FROM product, `order` WHERE product.ProductID = order.ProductID LIMIT $offset, $count";
+        $statement = self::prepare($query);
+        $statement->execute();
+        return $statement;
+    }
+
 }
 
 ?>

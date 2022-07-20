@@ -2,13 +2,11 @@
 namespace app\core;
 class Router{
     protected Request $request;
-    public Response $response;
 
     protected array $routes = [];
     
-    public function __construct(Request $request,  Response $response)
+    public function __construct(Request $request)
     {
-        $this->response = $response;
         $this->request = $request;
     }
 

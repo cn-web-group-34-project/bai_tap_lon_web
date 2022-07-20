@@ -24,6 +24,26 @@ class OrderController extends Controller{
         return json_encode($arrays);
     }
 
+    public function get_num_order(){
+        $result = $this->model->get_all_orders();
+        return $result->rowCount();
+    }
+
+    public function get_limit_orders(Request $request){
+        if ($request->isGet()){
+            $data = $request->getBody();
+            $result = $this->model->get_limit_orders($data['offset'], $data['count']);
+            if ($result->rowCount()>0){
+                $arrays = [];
+                while ($row = $result->fetch(PDO::FETCH_ASSOC)){
+                    $row['Image'] = explode(",",$row['Image']);
+                    array_push($arrays, $row);
+                }
+            }
+        return json_encode($arrays);
+        }
+        
+    }
 
     public function get_order_by_id(Request $request){
         if ($request->isGet()){

@@ -4,10 +4,8 @@ require_once __DIR__.'/../vendor/autoload.php';
 use app\controllers\SiteController;
 use app\controllers\AuthController;
 use app\controllers\CategoryController;
-use app\controllers\CustomerController;
 use app\controllers\OrderController;
 use app\controllers\ProductController;
-use app\controllers\ProductDetailController;
 use app\controllers\ProductTypeController;
 use app\controllers\UserController;
 use app\core\Application;
@@ -85,6 +83,8 @@ $app->router->delete('/delete_product',[ProductController::class,'delete_product
 $app->router->post('/insert_order',[OrderController::class,'insert_order']);
 $app->router->get('/get_all_orders',[OrderController::class,'get_all_orders']);
 $app->router->get('/get_order_by_id',[OrderController::class,'get_order_by_id']);
+$app->router->get('/get_num_order',[OrderController::class,'get_num_order']);
+$app->router->get('/get_limit_orders',[OrderController::class,'get_limit_orders']);
 $app->router->put('/update_order',[OrderController::class,'update_order']);
 $app->router->delete('/delete_order',[OrderController::class,'delete_order']);
 
