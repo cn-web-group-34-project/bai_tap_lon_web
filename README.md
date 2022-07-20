@@ -30,4 +30,4 @@ quản lí đơn hàng và quản lí sản phẩm
 + Nguyễn Hữu Huấn (28%): Thiết kế chung layout cho các trang Home, sản phẩm, chi tiết người dùng, chi tiết sản phẩm, xử lí repositive, thiết kế database.
 + Nguyễn Thành Bắc (16%): Upload data, xử lí repoitive
 
-![Alt Text](https://giphy.com/gifs/cnweb-b9XdLnAx4VPemtGWdL)
+![Alt Text](https://media.giphy.com/media/b9XdLnAx4VPemtGWdL/giphy.gif)
