@@ -51,6 +51,4 @@ class Product extends Model{
         $statement->execute();
         return $statement;
     }
-
-    
 }
